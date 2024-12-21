@@ -243,29 +243,6 @@ myEventHook = swallowEventHook (className =? "Alacritty" <||> className =? "XTer
 --myLogHook :: Handle -> X ()
 myLogHook = return ()
 
---dynamicLogWithPP $ xmobarPP      
-       -- { ppOutput = \x -> hPutStrLn xmproc0 x   -- xmobar on monitor 1
-       --                 >> hPutStrLn xmproc1 x   -- xmobar on monitor 2
-        --, ppCurrent = xmobarColor "#c678dd" "" . wrap
-        --              ("<box type=Bottom width=2 mb=2 color=" ++ "#c678dd" ++ ">") "</box>"
-          -- Visible but not current workspace
-        --, ppVisible = xmobarColor "#c678dd" "" 
-          -- Hidden workspace
-        --, ppHidden = xmobarColor "#51afef" "" . wrap "*" ""
-          -- Hidden workspaces (no windows)
-        --, ppHiddenNoWindows = xmobarColor "#51afef" "" 
-          -- Title of active window
-        --, ppTitle = xmobarColor "#dfdfdf" "" . shorten 60
-          -- Separator character
-        --, ppSep =  "<fc=" ++ "#5b6268" ++ "> <fn=1>|</fn> </fc>"
-          -- Urgent workspace
-        --, ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!"
-          -- Adding # of windows on current workspace to the bar
-       -- , ppExtras  = [windowCount]
-          -- order of things in xmobar
-        --, ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-       -- }
-
 mySB = statusBarProp "xmobar" (pure xmobarPP)
 ------------------------------------------------------------------------
 -- Startup hook
@@ -286,8 +263,7 @@ myStartupHook = do
 --
 main :: IO ()
 main = do
-  --  xmproc0 <- spawnPipe "xmobar -x 0 ~/.xmobarrc"
-  --  xmproc1 <- spawnPipe "xmobar -x 1 ~/.xmobarrc"
+
     xmonad $ docks . withEasySB mySB defToggleStrutsKey $ defaults
 
 -- A structure containing your configuration settings, overriding
